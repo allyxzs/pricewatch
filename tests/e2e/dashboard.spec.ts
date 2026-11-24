@@ -1,0 +1,62 @@
+import { test, expect } from '@playwright/test';
+test('create, edit, simulate, deduplicate, persist and remove', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('button', { name: 'Monitorar produto' })).toBeVisible();
+  await page.getByRole('button', { name: 'Monitorar produto' }).click();
+  await page.getByLabel('Nome do produto').fill('Teclado de teste');
+  await page.getByLabel('Quanto você quer pagar?').fill('200,00');
+  await page.getByLabel('Preço fictício atual').fill('300,00');
+  await page.getByRole('button', { name: 'Começar a acompanhar' }).click();
+  const card = page
+    .getByRole('button')
+    .filter({ has: page.getByRole('heading', { name: 'Teclado de teste' }) });
+  await expect(card).toBeVisible();
+  await card.click();
+  await page.getByLabel('Editar preço-alvo').fill('250,00');
+  await page.getByRole('button', { name: 'Salvar meta', exact: true }).click();
+  await page.getByRole('button', { name: 'Simular queda' }).click();
+  await page.getByRole('button', { name: 'Simular queda' }).click();
+  await page.getByRole('button', { name: 'Fechar', exact: true }).click();
+  await page.reload();
+  await expect(card).toContainText('R$ 250,00');
+  await expect(card).toContainText('Meta atingida');
+  await page.getByRole('button', { name: /Meus alertas/ }).click();
+  await expect(page.locator('.alert-row').filter({ hasText: 'Teclado de teste' })).toHaveCount(1);
+  await page.getByRole('button', { name: 'Visão geral', exact: true }).click();
+  await card.click();
+  await page.getByRole('button', { name: 'Pausar', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Retomar' })).toBeVisible();
+  await page.getByRole('button', { name: 'Remover produto', exact: true }).click();
+  await page.getByRole('button', { name: 'Sim, remover' }).click();
+  await expect(card).toHaveCount(0);
+});
+test('search, filters, stores and preferences', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.product-card')).toHaveCount(6);
+  await page.getByRole('button', { name: 'Meta atingida', exact: true }).click();
+  await expect(page.locator('.product-card')).toHaveCount(2);
+  await page.getByRole('button', { name: /Todos/ }).click();
+  await page.getByLabel('Buscar na sua lista').fill('Sony');
+  await expect(page.locator('.product-card')).toHaveCount(1);
+  await page.locator('.product-card').click();
+  await page.getByRole('button', { name: 'Adicionar loja' }).click();
+  await page.getByRole('button', { name: 'Adicionar oferta' }).click();
+  await expect(page.locator('.offer-row')).toHaveCount(4);
+  await page.getByRole('button', { name: 'Fechar', exact: true }).click();
+  await page.getByRole('button', { name: 'Preferências', exact: true }).click();
+  await page.getByLabel('Receber por e-mail').check();
+  await page.getByLabel('E-mail', { exact: true }).fill('demo@example.com');
+  await page.getByRole('button', { name: 'Salvar preferências' }).click();
+  await page.reload();
+  await page.getByRole('button', { name: 'Preferências', exact: true }).click();
+  await expect(page.getByLabel('Receber por e-mail')).toBeChecked();
+});
+test('mobile navigation and overflow', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await expect(page.locator('.product-card')).toHaveCount(6);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.getByRole('button', { name: 'Abrir menu' }).click();
+  await page.getByRole('button', { name: 'Histórico de preços', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Cada preço conta uma história.' })).toBeVisible();
+});

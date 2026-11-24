@@ -1,0 +1,49 @@
+{
+  "name": "pricewatch",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Seu pre\u00e7o. Seu momento. Monitor de pre\u00e7os sem spam.",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "test:integration": "node --import tsx --test tests/integration/*.test.ts",
+    "test:e2e": "playwright test",
+    "db:migrate": "node --env-file=.env.local --import tsx scripts/migrate.ts",
+    "worker": "node --env-file=.env.local --import tsx worker/index.ts",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.15",
+    "bullmq": "^5.65.0",
+    "cheerio": "^1.1.2",
+    "dotenv": "^17.2.3",
+    "ioredis": "^5.8.2",
+    "ipaddr.js": "^2.2.0",
+    "lucide-react": "^0.468.0",
+    "next": "16.4.6",
+    "pg": "^8.16.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@tailwindcss/postcss": "^4.1.17",
+    "@types/node": "^22.19.0",
+    "@types/pg": "^8.15.6",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "prettier": "^3.10.1",
+    "tailwindcss": "^4.1.17",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "type": "module"
+}

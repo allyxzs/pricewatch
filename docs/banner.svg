@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360">
+<rect width="1280" height="360" rx="24" fill="#202431"/><circle cx="1120" cy="160" r="170" fill="none" stroke="#3e3b51"/><circle cx="1120" cy="160" r="235" fill="none" stroke="#343447"/>
+<rect x="64" y="52" width="47" height="47" rx="14" fill="#c4e7d3"/><path d="m75 67 10 10 6-6 10 10m-9 0h9v-9" stroke="#294539" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="126" y="86" fill="#fff" font-family="Arial, sans-serif" font-size="32" font-weight="700" letter-spacing="-1">price<tspan font-weight="400">watch</tspan><tspan fill="#c4b4ee">.</tspan></text>
+<text x="64" y="178" fill="#f8f7fc" font-family="Arial, sans-serif" font-size="47" font-weight="600" letter-spacing="-1.5">Seu preço. Seu momento.</text>
+<text x="65" y="221" fill="#b3b2c2" font-family="Arial, sans-serif" font-size="19">A gente acompanha. Você só recebe um alerta quando vale a pena.</text>
+<rect x="65" y="265" width="139" height="30" rx="15" fill="#35483e"/><circle cx="82" cy="280" r="4" fill="#a8dcbf"/><text x="95" y="285" font-family="Arial, sans-serif" font-size="12" fill="#c3e5d1">Sem spam. Sempre.</text>
+<path d="m908 91 45 43 31-25 57 68 32-18 55 80 56-17" stroke="#baa9e6" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M880 239h330" stroke="#83b69c" stroke-width="2" stroke-dasharray="7 8"/><circle cx="1128" cy="239" r="12" fill="#c4e7d3" stroke="#435f53" stroke-width="8"/>
+</svg>
